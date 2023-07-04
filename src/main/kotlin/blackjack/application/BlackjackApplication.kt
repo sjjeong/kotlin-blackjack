@@ -12,6 +12,12 @@ class BlackjackApplication(
 ) {
 
     fun run() {
+        val playerList = ready()
+        play(playerList)
+        finish(playerList)
+    }
+
+    private fun ready(): List<Player> {
         val playerNameList = inputView.getPlayers()
 
         val playerList = Player.createPlayers(playerNameList)
@@ -23,7 +29,10 @@ class BlackjackApplication(
             }
         }
         outputView.showDefaultDrawToPlayers(playerList)
+        return playerList
+    }
 
+    private fun play(playerList: List<Player>) {
         playerList.forEach { player ->
             while (player.canReceiveCard && inputView.getMoreCard(player)) {
                 val card = blackjackShoe.draw()
@@ -31,7 +40,9 @@ class BlackjackApplication(
                 outputView.showPlayerCardList(player)
             }
         }
+    }
 
+    private fun finish(playerList: List<Player>) {
         outputView.showPlayersInfo(playerList)
     }
 
