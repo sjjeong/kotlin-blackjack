@@ -15,9 +15,7 @@ class BlackjackApplication(
         outputView.showInputPlayerNames()
         val playerNameList = inputView.getPlayers()
 
-        val playerList = playerNameList.split(",")
-            .map { it.trim() }
-            .map { Player(it) }
+        val playerList = Player.createPlayers(playerNameList)
 
         playerList.forEach { player ->
             repeat(2) {

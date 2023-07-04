@@ -27,7 +27,7 @@ data class Player(
     companion object {
         private const val BLACKJACK_SCORE = 21
         private const val ACE_EXTRA_POINT = 10
-        fun of(playerString: String): List<Player> {
+        fun createPlayers(playerString: String): List<Player> {
             return playerString.split(",")
                 .map { Player(it.trim()) }
         }

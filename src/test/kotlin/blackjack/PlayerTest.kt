@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 class PlayerTest {
     @Test
     internal fun `플레이어 입력은 , 로 구분한다`() {
-        val actual = Player.of("정석준, Dino")
+        val actual = Player.createPlayers("정석준, Dino")
         val expected = listOf(Player("정석준"), Player("Dino"))
         actual shouldBe expected
     }
