@@ -7,19 +7,9 @@ data class Player(
 
     val score: Int
         get() {
-            var score = 0
-            val aceRankGroup = cardList.groupBy { it.rank == Rank.ACE }
-            score += aceRankGroup[false]?.sumOf { it.rank.point } ?: 0
-
-            val aceCount = aceRankGroup[true]?.count() ?: 0
-            score += if (aceCount > 0) {
-                if (score + aceCount + 10 > 21) {
-                    aceCount
-                } else {
-                    aceCount + 10
-                }
-            } else {
-                0
+            var score = cardList.sumOf { it.rank.point }
+            if (cardList.any { it.rank == Rank.ACE } && score <= 11) {
+                score += 10
             }
             return score
         }
