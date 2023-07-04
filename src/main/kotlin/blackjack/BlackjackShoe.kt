@@ -15,7 +15,7 @@ class BlackjackShoe(deck: Int = DEFAULT_DECK_OF_CARDS) {
     }
 
     fun draw(): Card {
-        return cards.removeAt(0)
+        return cards.removeFirst()
     }
 
     companion object {
