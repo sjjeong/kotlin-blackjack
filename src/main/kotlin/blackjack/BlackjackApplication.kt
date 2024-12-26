@@ -1,9 +1,9 @@
-package blackjack.application
+package blackjack
 
-import blackjack.BlackjackShoe
-import blackjack.Player
-import blackjack.application.view.InputView
-import blackjack.application.view.OutputView
+import blackjack.domain.BlackjackShoe
+import blackjack.domain.Player
+import blackjack.view.InputView
+import blackjack.view.OutputView
 
 class BlackjackApplication(
     private val inputView: InputView,

@@ -1,4 +1,4 @@
-package blackjack
+package blackjack.domain
 
 class BlackjackShoe(deck: Int = DEFAULT_DECK_OF_CARDS) {
     private val cards: MutableList<Card> = mutableListOf()

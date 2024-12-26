@@ -1,5 +1,6 @@
 package blackjack
 
+import blackjack.domain.Player
 import io.kotest.inspectors.shouldForAll
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test

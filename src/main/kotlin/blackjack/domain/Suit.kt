@@ -1,4 +1,4 @@
-package blackjack
+package blackjack.domain
 
 enum class Suit(val korName: String) {
     SPADE("스페이드"),

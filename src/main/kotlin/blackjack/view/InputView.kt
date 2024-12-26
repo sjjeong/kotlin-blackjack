@@ -1,6 +1,6 @@
-package blackjack.application.view
+package blackjack.view
 
-import blackjack.Player
+import blackjack.domain.Player
 
 class InputView {
 
