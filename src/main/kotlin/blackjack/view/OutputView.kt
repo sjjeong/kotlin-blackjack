@@ -1,21 +1,21 @@
 package blackjack.view
 
-import blackjack.domain.Player
+import blackjack.domain.Participant
 
 class OutputView {
-    fun showDefaultDrawToPlayers(playerList: List<Player>) {
-        println("${playerList.joinToString { it.name }}에게 2장의 나누었습니다.")
-        playerList.forEach {
-            showPlayerCardList(it)
+    fun showDefaultDrawToParticipants(participantList: List<Participant>) {
+        println("${participantList.joinToString { it.name }}에게 2장의 나누었습니다.")
+        participantList.forEach {
+            showParticipantCardList(it)
         }
     }
 
-    fun showPlayerCardList(it: Player) {
+    fun showParticipantCardList(it: Participant) {
         println("${it.name}카드: ${it.cardList.joinToString { card -> card.toString() }}")
     }
 
-    fun showPlayersInfo(playerList: List<Player>) {
-        playerList.forEach {
+    fun showParticipantsInfo(participantList: List<Participant>) {
+        participantList.forEach {
             println("${it.name}카드: ${it.cardList.joinToString { card -> card.toString() }} - 결과: ${it.score}")
         }
     }

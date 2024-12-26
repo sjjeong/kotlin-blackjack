@@ -1,7 +1,7 @@
 package blackjack
 
 import blackjack.domain.BlackjackShoe
-import blackjack.domain.Player
+import blackjack.domain.Participant
 import blackjack.view.InputView
 import blackjack.view.OutputView
 
@@ -12,38 +12,38 @@ class BlackjackApplication(
 ) {
 
     fun run() {
-        val playerList = ready()
-        play(playerList)
-        finish(playerList)
+        val participantList = ready()
+        play(participantList)
+        finish(participantList)
     }
 
-    private fun ready(): List<Player> {
-        val playerNameList = inputView.getPlayers()
+    private fun ready(): List<Participant> {
+        val participantNameList = inputView.getParticipantNames()
 
-        val playerList = Player.createPlayers(playerNameList)
+        val participantList = Participant.createParticipants(participantNameList)
 
-        playerList.forEach { player ->
+        participantList.forEach { participant ->
             repeat(2) {
                 val card = blackjackShoe.draw()
-                player.receiveCard(card)
+                participant.receiveCard(card)
             }
         }
-        outputView.showDefaultDrawToPlayers(playerList)
-        return playerList
+        outputView.showDefaultDrawToParticipants(participantList)
+        return participantList
     }
 
-    private fun play(playerList: List<Player>) {
-        playerList.forEach { player ->
-            while (player.canReceiveCard && inputView.getMoreCard(player)) {
+    private fun play(participantList: List<Participant>) {
+        participantList.forEach { participant ->
+            while (participant.canReceiveCard && inputView.getMoreCard(participant)) {
                 val card = blackjackShoe.draw()
-                player.receiveCard(card)
-                outputView.showPlayerCardList(player)
+                participant.receiveCard(card)
+                outputView.showParticipantCardList(participant)
             }
         }
     }
 
-    private fun finish(playerList: List<Player>) {
-        outputView.showPlayersInfo(playerList)
+    private fun finish(participantList: List<Participant>) {
+        outputView.showParticipantsInfo(participantList)
     }
 
 }

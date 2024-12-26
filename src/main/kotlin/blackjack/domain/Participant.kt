@@ -1,6 +1,6 @@
 package blackjack.domain
 
-data class Player(
+data class Participant(
     val name: String,
 ) {
     val cardList: MutableList<Card> = mutableListOf()
@@ -27,9 +27,9 @@ data class Player(
     companion object {
         private const val BLACKJACK_SCORE = 21
         private const val ACE_EXTRA_POINT = 10
-        fun createPlayers(playerString: String): List<Player> {
-            return playerString.split(",")
-                .map { Player(it.trim()) }
+        fun createParticipants(participantString: String): List<Participant> {
+            return participantString.split(",")
+                .map { Participant(it.trim()) }
         }
     }
 
