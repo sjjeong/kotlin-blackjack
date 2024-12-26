@@ -5,8 +5,8 @@ class BlackjackShoe(deck: Int = DEFAULT_DECK_OF_CARDS) {
 
     init {
         require(deck in 1..MAX_DECK_OF_CARDS)
-        for (suit in Suit.values()) {
-            for (rank in Rank.values()) {
+        for (suit in Suit.entries) {
+            for (rank in Rank.entries) {
                 cards.addAll(List(deck) { Card(suit, rank) })
             }
         }
