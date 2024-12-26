@@ -9,9 +9,15 @@ data class Participant(
         }
 
     companion object {
-        fun createParticipants(participantString: String): List<Participant> {
+        fun createParticipants(participantString: String, blackjackShoe: BlackjackShoe): List<Participant> {
             return participantString.split(",")
-                .map { Participant(it.trim()) }
+                .map { name ->
+                    Participant(name.trim()).apply {
+                        repeat(2) {
+                            receiveCard(blackjackShoe.draw())
+                        }
+                    }
+                }
         }
     }
 }

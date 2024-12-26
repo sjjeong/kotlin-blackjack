@@ -1,16 +1,26 @@
 package blackjack
 
+import blackjack.domain.BlackjackShoe
 import blackjack.domain.Participant
 import io.kotest.inspectors.shouldForAll
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 class ParticipantTest {
+    private val blackjackShoe = BlackjackShoe()
+
     @Test
     internal fun `참가자 입력은 , 로 구분한다`() {
-        val actual = Participant.createParticipants("정석준, Dino")
+        val actual = Participant.createParticipants("정석준, Dino", blackjackShoe)
         val expected = listOf(Participant("정석준"), Participant("Dino"))
         actual shouldBe expected
+    }
+
+    @Test
+    fun `참가자는 최초 2개의 카드를 가진다`() {
+        val actual = Participant.createParticipants("정석준, Dino", blackjackShoe).first().cardList.size
+
+        actual shouldBe 2
     }
 
     @Test
@@ -106,6 +116,4 @@ class ParticipantTest {
         }
         participant.canReceiveCard shouldBe false
     }
-
-
 }

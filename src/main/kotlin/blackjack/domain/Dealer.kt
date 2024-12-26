@@ -9,5 +9,11 @@ data class Dealer(
 
     companion object {
         private const val DEFAULT_DEALER_NAME = "딜러"
+
+        fun createDealer(blackjackShoe: BlackjackShoe): Dealer {
+            return Dealer().apply {
+                receiveCard(blackjackShoe.draw())
+            }
+        }
     }
 }

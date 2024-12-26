@@ -1,6 +1,7 @@
 package blackjack
 
 import blackjack.domain.BlackjackShoe
+import blackjack.domain.Dealer
 import blackjack.domain.Participant
 import blackjack.view.InputView
 import blackjack.view.OutputView
@@ -18,18 +19,15 @@ class BlackjackApplication(
     }
 
     private fun ready(): List<Participant> {
-        val participantNameList = inputView.getParticipantNames()
+        val participantNameString = inputView.getParticipantNames()
 
-        val participantList = Participant.createParticipants(participantNameList)
-
-        participantList.forEach { participant ->
-            repeat(2) {
-                val card = blackjackShoe.draw()
-                participant.receiveCard(card)
-            }
-        }
-        outputView.showDefaultDrawToParticipants(participantList)
-        return participantList
+        val dealer = Dealer.createDealer(blackjackShoe = blackjackShoe)
+        val participants = Participant.createParticipants(
+            participantString = participantNameString,
+            blackjackShoe = blackjackShoe
+        )
+        outputView.showReady(dealer = dealer, participants = participants)
+        return participants
     }
 
     private fun play(participantList: List<Participant>) {
