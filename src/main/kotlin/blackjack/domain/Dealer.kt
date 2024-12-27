@@ -10,11 +10,5 @@ data class Dealer(
     companion object {
         private const val DEFAULT_DEALER_NAME = "딜러"
         private const val CAN_RECEIVE_CARD_SCORE = 16
-
-        fun createDealer(blackjackShoe: BlackjackShoe): Dealer {
-            return Dealer().apply {
-                receiveCard(blackjackShoe.draw())
-            }
-        }
     }
 }

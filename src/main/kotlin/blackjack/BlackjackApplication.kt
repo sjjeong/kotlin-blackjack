@@ -20,13 +20,18 @@ class BlackjackApplication(
     }
 
     private fun ready(): Pair<Dealer, List<Participant>> {
-        val participantNameString = inputView.getParticipantNames()
+        val participantNames = inputView.getParticipantNames()
 
-        val dealer = Dealer.createDealer(blackjackShoe = blackjackShoe)
-        val participants = Participant.createParticipants(
-            participantString = participantNameString,
-            blackjackShoe = blackjackShoe
-        )
+        val dealer = Dealer()
+        val participants = participantNames.map { name -> Participant(name.trim()) }
+
+        dealer.receiveCard(blackjackShoe.draw())
+        participants.forEach { participant ->
+            repeat(2) {
+                participant.receiveCard(blackjackShoe.draw())
+            }
+        }
+
         outputView.showReady(dealer = dealer, participants = participants)
         return dealer to participants
     }

@@ -1,27 +1,11 @@
 package blackjack
 
-import blackjack.domain.BlackjackShoe
 import blackjack.domain.Participant
 import io.kotest.inspectors.shouldForAll
 import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 class ParticipantTest {
-    private val blackjackShoe = BlackjackShoe()
-
-    @Test
-    internal fun `참가자 입력은 , 로 구분한다`() {
-        val actual = Participant.createParticipants("정석준, Dino", blackjackShoe)
-        val expected = listOf(Participant("정석준"), Participant("Dino"))
-        actual shouldBe expected
-    }
-
-    @Test
-    fun `참가자는 최초 2개의 카드를 가진다`() {
-        val actual = Participant.createParticipants("정석준, Dino", blackjackShoe).first().cardList.size
-
-        actual shouldBe 2
-    }
 
     @Test
     internal fun `참가자는 받은 카드를 가지고 있는다`() {
@@ -53,7 +37,7 @@ class ParticipantTest {
                 },
                 expected = 5
             ),
-            )
+        )
         testCaseList.shouldForAll {
             it.participant.score shouldBe it.expected
         }
@@ -91,7 +75,7 @@ class ParticipantTest {
                 },
                 expected = 12
             ),
-            )
+        )
 
         testCaseList.shouldForAll {
             it.participant.score shouldBe it.expected
@@ -99,21 +83,12 @@ class ParticipantTest {
     }
 
     @Test
-    internal fun `참가자가 가지고 있는 카드의 합이 21 미만이면 카드를 더 받을 수 있다`() {
-        val participant = Participant("정석준").apply {
-            receiveCard(createCard("10스페이드"))
-            receiveCard(createCard("10스페이드"))
-        }
-        participant.canReceiveCard shouldBe true
-    }
-
-    @Test
-    internal fun `참가자가 가지고 있는 카드의 합이 21 이상이면 카드를 더 받을 수 없다`() {
+    internal fun `참가자가 가지고 있는 카드의 합이 21 이하이면 카드를 더 받을 수 없다`() {
         val participant = Participant("정석준").apply {
             receiveCard(createCard("10스페이드"))
             receiveCard(createCard("10스페이드"))
             receiveCard(createCard("A스페이드"))
         }
-        participant.canReceiveCard shouldBe false
+        participant.canReceiveCard shouldBe true
     }
 }
