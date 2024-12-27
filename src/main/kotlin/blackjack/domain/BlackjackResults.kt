@@ -1,24 +1,24 @@
 package blackjack.domain
 
-class BlackjackResult(
+class BlackjackResults(
     val dealer: Dealer,
     val participants: List<Participant>,
 ) {
 
-    val result: Map<Match, List<Participant>> = run {
+    val result: Map<BlackjackResult, List<Participant>> = run {
         val dealerScore = dealer.score
         participants.groupBy { participant ->
             val participantScore = participant.score
 
             when {
-                participantScore > dealerScore -> Match.WIN
-                participantScore < dealerScore -> Match.LOSE
-                else -> Match.DRAW
+                participantScore > dealerScore -> BlackjackResult.WIN
+                participantScore < dealerScore -> BlackjackResult.LOSE
+                else -> BlackjackResult.DRAW
             }
         }
     }
 
-    enum class Match {
+    enum class BlackjackResult {
         WIN,
         LOSE,
         DRAW,

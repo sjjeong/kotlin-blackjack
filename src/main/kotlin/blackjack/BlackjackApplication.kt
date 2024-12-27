@@ -1,6 +1,6 @@
 package blackjack
 
-import blackjack.domain.BlackjackResult
+import blackjack.domain.BlackjackResults
 import blackjack.domain.BlackjackShoe
 import blackjack.domain.Dealer
 import blackjack.domain.Participant
@@ -55,7 +55,7 @@ class BlackjackApplication(
     private fun finish(dealer: Dealer, participantList: List<Participant>) {
         outputView.showDealerInfo(dealer = dealer)
         outputView.showParticipantsInfo(participantList)
-        outputView.showResult(BlackjackResult(dealer = dealer, participants = participantList))
+        outputView.showResult(BlackjackResults(dealer = dealer, participants = participantList))
     }
 
 }
