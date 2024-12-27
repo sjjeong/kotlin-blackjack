@@ -5,7 +5,9 @@ abstract class Player(
 ) {
     abstract val canReceiveCard: Boolean
 
-    val cardList: MutableList<Card> = mutableListOf()
+    private val _cardList: MutableList<Card> = mutableListOf()
+    val cardList: List<Card>
+        get() = _cardList.toList()
 
     val score: Int
         get() {
@@ -18,7 +20,7 @@ abstract class Player(
         }
 
     fun receiveCard(card: Card) {
-        cardList.add(card)
+        _cardList.add(card)
     }
 
     companion object {
