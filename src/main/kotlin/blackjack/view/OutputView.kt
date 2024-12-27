@@ -1,6 +1,7 @@
 package blackjack.view
 
 import blackjack.domain.BlackjackResult
+import blackjack.domain.Card
 import blackjack.domain.Dealer
 import blackjack.domain.Participant
 
@@ -16,16 +17,16 @@ class OutputView {
     }
 
     private fun showDealerCard(dealer: Dealer) {
-        println("딜러: ${dealer.cardList.joinToString { card -> card.toString() }}")
+        println("딜러: ${dealer.cardList.joinToString { card -> createCardName(card) }}")
     }
 
     fun showParticipantCardList(it: Participant) {
-        println("${it.name}카드: ${it.cardList.joinToString { card -> card.toString() }}")
+        println("${it.name}카드: ${it.cardList.joinToString { card -> createCardName(card) }}")
     }
 
     fun showParticipantsInfo(participantList: List<Participant>) {
         participantList.forEach {
-            println("${it.name}카드: ${it.cardList.joinToString { card -> card.toString() }} - 결과: ${it.score}")
+            println("${it.name}카드: ${it.cardList.joinToString { card -> createCardName(card) }} - 결과: ${it.score}")
         }
     }
 
@@ -34,7 +35,7 @@ class OutputView {
     }
 
     fun showDealerInfo(dealer: Dealer) {
-        println("\n${dealer.name}카드: ${dealer.cardList.joinToString { card -> card.toString() }} - 결과: ${dealer.score}")
+        println("\n${dealer.name}카드: ${dealer.cardList.joinToString { card -> createCardName(card) }} - 결과: ${dealer.score}")
     }
 
     fun showResult(blackjackResult: BlackjackResult) {
@@ -53,5 +54,9 @@ class OutputView {
         participantDraw.forEach {
             println("${it.name}: 무")
         }
+    }
+
+    private fun createCardName(card: Card): String {
+        return "${card.rank.nickname}${card.suit.korName}"
     }
 }
