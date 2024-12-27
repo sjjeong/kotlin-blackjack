@@ -1,5 +1,6 @@
 package blackjack.view
 
+import blackjack.domain.BlackjackResult
 import blackjack.domain.Dealer
 import blackjack.domain.Participant
 
@@ -25,6 +26,32 @@ class OutputView {
     fun showParticipantsInfo(participantList: List<Participant>) {
         participantList.forEach {
             println("${it.name}카드: ${it.cardList.joinToString { card -> card.toString() }} - 결과: ${it.score}")
+        }
+    }
+
+    fun showDealerReceivedCard() {
+        println("딜러는 16이하라 한장의 카드를 더 받았습니다.")
+    }
+
+    fun showDealerInfo(dealer: Dealer) {
+        println("\n${dealer.name}카드: ${dealer.cardList.joinToString { card -> card.toString() }} - 결과: ${dealer.score}")
+    }
+
+    fun showResult(blackjackResult: BlackjackResult) {
+        println("\n## 최종승패")
+        val result = blackjackResult.result
+        val participantWin = result[BlackjackResult.Match.WIN].orEmpty()
+        val participantLose = result[BlackjackResult.Match.LOSE].orEmpty()
+        val participantDraw = result[BlackjackResult.Match.DRAW].orEmpty()
+        println("${blackjackResult.dealer.name}: ${participantLose.size}승 ${participantWin.size}패 ${participantDraw.size}무")
+        participantWin.forEach {
+            println("${it.name}: 승")
+        }
+        participantLose.forEach {
+            println("${it.name}: 패")
+        }
+        participantDraw.forEach {
+            println("${it.name}: 무")
         }
     }
 }

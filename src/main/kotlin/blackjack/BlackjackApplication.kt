@@ -1,5 +1,6 @@
 package blackjack
 
+import blackjack.domain.BlackjackResult
 import blackjack.domain.BlackjackShoe
 import blackjack.domain.Dealer
 import blackjack.domain.Participant
@@ -13,12 +14,12 @@ class BlackjackApplication(
 ) {
 
     fun run() {
-        val participantList = ready()
-        play(participantList)
-        finish(participantList)
+        val (dealer, participantList) = ready()
+        play(dealer = dealer, participantList = participantList)
+        finish(dealer = dealer, participantList = participantList)
     }
 
-    private fun ready(): List<Participant> {
+    private fun ready(): Pair<Dealer, List<Participant>> {
         val participantNameString = inputView.getParticipantNames()
 
         val dealer = Dealer.createDealer(blackjackShoe = blackjackShoe)
@@ -27,10 +28,10 @@ class BlackjackApplication(
             blackjackShoe = blackjackShoe
         )
         outputView.showReady(dealer = dealer, participants = participants)
-        return participants
+        return dealer to participants
     }
 
-    private fun play(participantList: List<Participant>) {
+    private fun play(dealer: Dealer, participantList: List<Participant>) {
         participantList.forEach { participant ->
             while (participant.canReceiveCard && inputView.getMoreCard(participant)) {
                 val card = blackjackShoe.draw()
@@ -38,10 +39,18 @@ class BlackjackApplication(
                 outputView.showParticipantCardList(participant)
             }
         }
+
+        while (dealer.canReceiveCard) {
+            val card = blackjackShoe.draw()
+            dealer.receiveCard(card)
+            outputView.showDealerReceivedCard()
+        }
     }
 
-    private fun finish(participantList: List<Participant>) {
+    private fun finish(dealer: Dealer, participantList: List<Participant>) {
+        outputView.showDealerInfo(dealer = dealer)
         outputView.showParticipantsInfo(participantList)
+        outputView.showResult(BlackjackResult(dealer = dealer, participants = participantList))
     }
 
 }
