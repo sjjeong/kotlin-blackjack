@@ -5,10 +5,12 @@ data class Participant(
 ) : Player(name = name) {
     override val canReceiveCard: Boolean
         get() {
-            return score < 21
+            return score <= CAN_RECEIVE_CARD_SCORE
         }
 
     companion object {
+        private const val CAN_RECEIVE_CARD_SCORE = 21
+
         fun createParticipants(participantString: String, blackjackShoe: BlackjackShoe): List<Participant> {
             return participantString.split(",")
                 .map { name ->
