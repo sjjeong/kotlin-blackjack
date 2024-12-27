@@ -10,16 +10,16 @@ import blackjack.view.OutputView
 class BlackjackApplication(
     private val inputView: InputView,
     private val outputView: OutputView,
-    private val blackjackShoe: BlackjackShoe = BlackjackShoe(),
 ) {
 
     fun run() {
-        val (dealer, participantList) = ready()
-        play(dealer = dealer, participantList = participantList)
+        val blackjackShoe = BlackjackShoe()
+        val (dealer, participantList) = ready(blackjackShoe)
+        play(dealer = dealer, participantList = participantList, blackjackShoe = blackjackShoe)
         finish(dealer = dealer, participantList = participantList)
     }
 
-    private fun ready(): Pair<Dealer, List<Participant>> {
+    private fun ready(blackjackShoe: BlackjackShoe): Pair<Dealer, List<Participant>> {
         val participantNames = inputView.getParticipantNames()
 
         val dealer = Dealer()
@@ -36,7 +36,7 @@ class BlackjackApplication(
         return dealer to participants
     }
 
-    private fun play(dealer: Dealer, participantList: List<Participant>) {
+    private fun play(dealer: Dealer, participantList: List<Participant>, blackjackShoe: BlackjackShoe) {
         participantList.forEach { participant ->
             while (participant.canReceiveCard && inputView.getMoreCard(participant)) {
                 val card = blackjackShoe.draw()
