@@ -1,4 +1,4 @@
-package blackjack
+package blackjack.domain
 
 enum class Rank(val nickname: String, val point: Int) {
     ACE(nickname = "A", point = 1),
@@ -17,7 +17,7 @@ enum class Rank(val nickname: String, val point: Int) {
 
     companion object {
         fun of(cardString: String): Rank {
-            return values().find { it.nickname in cardString } ?: throw IllegalArgumentException("옳지 않는 카드 이름 입니다.")
+            return entries.find { it.nickname in cardString } ?: throw IllegalArgumentException("옳지 않는 카드 이름 입니다.")
         }
     }
 }

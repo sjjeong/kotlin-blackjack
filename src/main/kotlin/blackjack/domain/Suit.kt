@@ -1,4 +1,4 @@
-package blackjack
+package blackjack.domain
 
 enum class Suit(val korName: String) {
     SPADE("스페이드"),
@@ -8,7 +8,7 @@ enum class Suit(val korName: String) {
 
     companion object {
         fun of(cardString: String): Suit {
-            return values().find { it.korName in cardString } ?: throw IllegalArgumentException("옳지 않는 카드 이름 입니다.")
+            return entries.find { it.korName in cardString } ?: throw IllegalArgumentException("옳지 않는 카드 이름 입니다.")
         }
     }
 }
