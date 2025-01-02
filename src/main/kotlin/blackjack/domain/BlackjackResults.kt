@@ -11,8 +11,8 @@ class BlackjackResults(
             val participantScore = participant.score
 
             when {
-                participantScore > dealerScore -> BlackjackResult.WIN
-                participantScore < dealerScore -> BlackjackResult.LOSE
+                (participantScore <= Const.NUMBER_BLACKJACK && participantScore > dealerScore) || dealerScore > Const.NUMBER_BLACKJACK -> BlackjackResult.WIN
+                (dealerScore <= Const.NUMBER_BLACKJACK && participantScore < dealerScore) || participantScore > Const.NUMBER_BLACKJACK -> BlackjackResult.LOSE
                 else -> BlackjackResult.DRAW
             }
         }

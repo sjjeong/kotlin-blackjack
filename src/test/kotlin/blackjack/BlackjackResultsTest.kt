@@ -70,4 +70,63 @@ class BlackjackResultsTest {
         actual.shouldNotBeNull()
         actual shouldBe 1
     }
+
+    @Test
+    fun `딜러가 버스트면 참가자의 승`() {
+        val blackjackResults = BlackjackResults(
+            Dealer().apply {
+                receiveCard(Card(Suit.SPADE, Rank.KING))
+                receiveCard(Card(Suit.SPADE, Rank.KING))
+                receiveCard(Card(Suit.SPADE, Rank.KING))
+            },
+            listOf(
+                Participant("a").apply {
+                    receiveCard(Card(Suit.SPADE, Rank.KING))
+                    receiveCard(Card(Suit.SPADE, Rank.KING))
+                },
+                Participant("b").apply {
+                    receiveCard(Card(Suit.SPADE, Rank.FIVE))
+                    receiveCard(Card(Suit.SPADE, Rank.SIX))
+                },
+                Participant("c").apply {
+                    receiveCard(Card(Suit.SPADE, Rank.TWO))
+                    receiveCard(Card(Suit.SPADE, Rank.TWO))
+                },
+            )
+        )
+
+        val actual = blackjackResults.result[BlackjackResults.BlackjackResult.WIN]?.size
+        actual.shouldNotBeNull()
+        actual shouldBe 3
+    }
+
+    @Test
+    fun `참가자가 버스트면 딜러가 승`() {
+        val blackjackResults = BlackjackResults(
+            Dealer().apply {
+                receiveCard(Card(Suit.SPADE, Rank.KING))
+                receiveCard(Card(Suit.SPADE, Rank.KING))
+            },
+            listOf(
+                Participant("a").apply {
+                    receiveCard(Card(Suit.SPADE, Rank.KING))
+                    receiveCard(Card(Suit.SPADE, Rank.KING))
+                },
+                Participant("b").apply {
+                    receiveCard(Card(Suit.SPADE, Rank.KING))
+                    receiveCard(Card(Suit.SPADE, Rank.KING))
+                },
+                Participant("c").apply {
+                    receiveCard(Card(Suit.SPADE, Rank.KING))
+                    receiveCard(Card(Suit.SPADE, Rank.KING))
+                    receiveCard(Card(Suit.SPADE, Rank.KING))
+                },
+            )
+        )
+
+        val actual = blackjackResults.result[BlackjackResults.BlackjackResult.LOSE]?.size
+        println(blackjackResults.result)
+        actual.shouldNotBeNull()
+        actual shouldBe 1
+    }
 }
