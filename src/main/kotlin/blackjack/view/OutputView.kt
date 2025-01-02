@@ -4,9 +4,10 @@ import blackjack.domain.BlackjackResults
 import blackjack.domain.Card
 import blackjack.domain.Dealer
 import blackjack.domain.Participant
+import blackjack.domain.Participants
 
 class OutputView {
-    fun showReady(dealer: Dealer, participants: List<Participant>) {
+    fun showReady(dealer: Dealer, participants: Participants) {
         println("\n${dealer.name}와 ${participants.joinToString { it.name }}에게 2장의 나누었습니다.")
 
         showDealerCard(dealer)

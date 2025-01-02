@@ -19,6 +19,8 @@ abstract class Player(
             return score
         }
 
+    abstract fun setupCard(blackjackShoe: BlackjackShoe)
+
     fun receiveCard(card: Card) {
         _cardList.add(card)
     }
