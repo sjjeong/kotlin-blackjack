@@ -40,20 +40,9 @@ class OutputView {
     }
 
     fun showResult(blackjackResults: BlackjackResults) {
-        println("\n## 최종승패")
-        val result = blackjackResults.result
-        val participantWin = result[BlackjackResults.BlackjackResult.WIN].orEmpty()
-        val participantLose = result[BlackjackResults.BlackjackResult.LOSE].orEmpty()
-        val participantDraw = result[BlackjackResults.BlackjackResult.DRAW].orEmpty()
-        println("${blackjackResults.dealer.name}: ${participantLose.size}승 ${participantWin.size}패 ${participantDraw.size}무")
-        participantWin.forEach {
-            println("${it.name}: 승")
-        }
-        participantLose.forEach {
-            println("${it.name}: 패")
-        }
-        participantDraw.forEach {
-            println("${it.name}: 무")
+        println("\n## 최종 수익")
+        blackjackResults.result.forEach { player ->
+            println("${player.name}: ${player.money}")
         }
     }
 

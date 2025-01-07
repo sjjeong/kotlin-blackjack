@@ -19,6 +19,8 @@ abstract class Player(
             return score
         }
 
+    var money: Int = 0
+
     abstract fun setupCard(blackjackShoe: BlackjackShoe)
 
     fun receiveCard(card: Card) {

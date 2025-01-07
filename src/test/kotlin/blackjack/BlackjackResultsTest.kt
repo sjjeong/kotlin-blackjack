@@ -22,13 +22,14 @@ class BlackjackResultsTest {
                 Participant("a").apply {
                     receiveCard(Card(Suit.SPADE, Rank.KING))
                     receiveCard(Card(Suit.SPADE, Rank.NINE))
+                    bettingMoney = 10000
                 }
             )
         )
 
-        val actual = blackjackResults.result[BlackjackResults.BlackjackResult.LOSE]?.size
+        val actual = blackjackResults.result.first().money
         actual.shouldNotBeNull()
-        actual shouldBe 1
+        actual shouldBe 10000
     }
 
     @Test
@@ -42,13 +43,14 @@ class BlackjackResultsTest {
                 Participant("a").apply {
                     receiveCard(Card(Suit.SPADE, Rank.KING))
                     receiveCard(Card(Suit.SPADE, Rank.KING))
+                    bettingMoney = 10000
                 }
             )
         )
 
-        val actual = blackjackResults.result[BlackjackResults.BlackjackResult.WIN]?.size
+        val actual = blackjackResults.result.first().money
         actual.shouldNotBeNull()
-        actual shouldBe 1
+        actual shouldBe -10000
     }
 
     @Test
@@ -62,13 +64,14 @@ class BlackjackResultsTest {
                 Participant("a").apply {
                     receiveCard(Card(Suit.SPADE, Rank.KING))
                     receiveCard(Card(Suit.SPADE, Rank.KING))
+                    bettingMoney = 10000
                 }
             )
         )
 
-        val actual = blackjackResults.result[BlackjackResults.BlackjackResult.DRAW]?.size
+        val actual = blackjackResults.result.first().money
         actual.shouldNotBeNull()
-        actual shouldBe 1
+        actual shouldBe 0
     }
 
     @Test
@@ -83,21 +86,14 @@ class BlackjackResultsTest {
                 Participant("a").apply {
                     receiveCard(Card(Suit.SPADE, Rank.KING))
                     receiveCard(Card(Suit.SPADE, Rank.KING))
-                },
-                Participant("b").apply {
-                    receiveCard(Card(Suit.SPADE, Rank.FIVE))
-                    receiveCard(Card(Suit.SPADE, Rank.SIX))
-                },
-                Participant("c").apply {
-                    receiveCard(Card(Suit.SPADE, Rank.TWO))
-                    receiveCard(Card(Suit.SPADE, Rank.TWO))
+                    bettingMoney = 10000
                 },
             )
         )
 
-        val actual = blackjackResults.result[BlackjackResults.BlackjackResult.WIN]?.size
+        val actual = blackjackResults.result.first().money
         actual.shouldNotBeNull()
-        actual shouldBe 3
+        actual shouldBe -10000
     }
 
     @Test
@@ -111,22 +107,14 @@ class BlackjackResultsTest {
                 Participant("a").apply {
                     receiveCard(Card(Suit.SPADE, Rank.KING))
                     receiveCard(Card(Suit.SPADE, Rank.KING))
-                },
-                Participant("b").apply {
                     receiveCard(Card(Suit.SPADE, Rank.KING))
-                    receiveCard(Card(Suit.SPADE, Rank.KING))
-                },
-                Participant("c").apply {
-                    receiveCard(Card(Suit.SPADE, Rank.KING))
-                    receiveCard(Card(Suit.SPADE, Rank.KING))
-                    receiveCard(Card(Suit.SPADE, Rank.KING))
+                    bettingMoney = 10000
                 },
             )
         )
 
-        val actual = blackjackResults.result[BlackjackResults.BlackjackResult.LOSE]?.size
-        println(blackjackResults.result)
+        val actual = blackjackResults.result.first().money
         actual.shouldNotBeNull()
-        actual shouldBe 1
+        actual shouldBe 10000
     }
 }
