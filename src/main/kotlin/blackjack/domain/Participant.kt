@@ -3,6 +3,8 @@ package blackjack.domain
 data class Participant(
     override val name: String
 ) : Player(name = name) {
+    var bettingMoney: Int = 0
+
     override val canReceiveCard: Boolean
         get() {
             return score <= CAN_RECEIVE_CARD_SCORE

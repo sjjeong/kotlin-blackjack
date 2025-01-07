@@ -1,6 +1,7 @@
 package blackjack.view
 
 import blackjack.domain.Participant
+import blackjack.domain.Participants
 
 class InputView {
 
@@ -16,6 +17,15 @@ class InputView {
             "y" -> true
             "n" -> false
             else -> false
+        }
+    }
+
+    fun requestBettingMoney(participants: Participants) {
+        println()
+        participants.forEach { participant ->
+            println("${participant.name}의 배팅 금액은?")
+            val bettingMoney = readlnOrNull()?.toIntOrNull() ?: error("배팅은 ")
+            participant.bettingMoney = bettingMoney
         }
     }
 
